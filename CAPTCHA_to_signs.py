@@ -1,5 +1,7 @@
+
 import numpy as np
 from save_images import NewSign
+from scipy import misc
 
 
 class DFS:
@@ -8,12 +10,14 @@ class DFS:
      signs in passed image"""
 
     def __init__(self, img):
-        self.rows = img.shape[0]
-        self.cols = img.shape[1]
+        self.img = misc.imread(img)
+        self.rows = self.img.shape[0]
+        self.cols = self.img.shape[1]
         self.array = np.zeros((self.rows, self.cols))
-        self.bin_array(img)
+        self.bin_array()
         self.visited = np.zeros((self.rows+1, self.cols+1))
         self.pixels = None
+        self.id = 1
 
     def black_or_white(self, A):
 
@@ -22,7 +26,7 @@ class DFS:
 
         return np.sign(765 - np.sum(A))
 
-    def bin_array(self, img):
+    def bin_array(self):
 
         """convert rgb array to
         binary black-or-white array
@@ -31,7 +35,7 @@ class DFS:
         for x in range(self.rows):
             for y in range(self.cols):
                 self.array[x, y] = \
-                    np.array(self.black_or_white(img[x, y]))
+                    np.array(self.black_or_white(self.img[x, y]))
 
     def neighbours(self, point):
 
@@ -102,4 +106,12 @@ class DFS:
                     self.pixels = [[point_x, point_y]]
                     self.dfs((point_x, point_y))
                     new_sign = NewSign(np.array(self.pixels))
-                    new_sign.save()
+                    new_sign.save(str(self.id))
+                    self.id += 1
+
+
+if __name__ == "__main__":
+    dfs = DFS('2A2X.png')
+    dfs.dfs_all()
+
+

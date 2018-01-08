@@ -1,7 +1,6 @@
 import numpy as np
 from scipy import misc
 
-
 class NewSign:
     def __init__(self, pixels):
         self.pixels = pixels
@@ -41,5 +40,8 @@ class NewSign:
 
         return bitmap
 
-    def save(self):
-        misc.imsave(self.bitmap)
+    def show(self):
+        misc.imshow(self.bitmap)
+
+    def save(self, id):
+        misc.imsave(id + '.png', self.bitmap)
