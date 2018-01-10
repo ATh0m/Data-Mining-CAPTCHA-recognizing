@@ -95,8 +95,8 @@ class DFS:
 
         """start dfs on all black pixels"""
         signs = []
-        for point_x in range(self.rows):
-            for point_y in range(self.cols):
+        for point_y in range(self.cols):
+            for point_x in range(self.rows):
 
                 # start dfs only on black pixel
 
