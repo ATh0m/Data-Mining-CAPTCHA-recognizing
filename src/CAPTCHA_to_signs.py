@@ -94,7 +94,7 @@ class DFS:
     def dfs_all(self):
 
         """start dfs on all black pixels"""
-
+        signs = []
         for point_x in range(self.rows):
             for point_y in range(self.cols):
 
@@ -106,8 +106,9 @@ class DFS:
                     self.pixels = [[point_x, point_y]]
                     self.dfs((point_x, point_y))
                     new_sign = NewSign(np.array(self.pixels))
-                    new_sign.save(str(self.id))
+                    signs.append(new_sign)
                     self.id += 1
+        return signs
 
 
 if __name__ == "__main__":
