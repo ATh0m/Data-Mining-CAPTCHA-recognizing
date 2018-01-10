@@ -32,11 +32,10 @@ class NewSign:
 
         """save a bitmap of separated sign"""
 
-        bitmap = np.full((16, 16, 3),
-                         [255, 255, 255])
+        bitmap = np.full((16, 16), 1.)
         for pixel in self.normalized:
             if pixel[0] < 16 and pixel[1] < 16:
-                bitmap[pixel[0], pixel[1]] = [0, 0, 0]
+                bitmap[pixel[0], pixel[1]] = 0.
 
         return bitmap
 
