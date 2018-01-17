@@ -105,7 +105,7 @@ class DFS:
 
                     self.pixels = [[point_x, point_y]]
                     self.dfs((point_x, point_y))
-                    new_sign = NewSign(np.array(self.pixels))
+                    new_sign = NewSign(np.array(self.pixels), 16)
                     signs.append(new_sign)
                     self.id += 1
         return signs
