@@ -76,12 +76,16 @@ class DBScan:
 
         sorted_signs.sort(key=itemgetter(1))
 
+        signs = []
         for k in sorted_signs:
             indexes = (db.labels_ == k[2])
 
             new_sign = NewSign(array_of_indexes[indexes], 32)
-            new_sign.save(str(self.id))
+            #new_sign.save(str(self.id))
+            signs.append(new_sign)
             self.id += 1
+
+        return signs
 
 
 if __name__ == "__main__":
