@@ -11,7 +11,7 @@ class DBScan:
     """class finding bitmaps of separated
      signs in passed image"""
 
-    def __init__(self, img):
+    def __init__(self, img, min_samples=7):
         self.img = misc.imread(img)
         self.rows = self.img.shape[0]
         self.cols = self.img.shape[1]
@@ -19,6 +19,7 @@ class DBScan:
         self.bin_array()
         self.visited = np.zeros((self.rows+1, self.cols+1))
         self.id = 1
+        self.min_samples = min_samples
 
     def black_or_white(self, A):
 
@@ -58,7 +59,7 @@ class DBScan:
 
         # dbscan here
 
-        db = DBSCAN(eps=sqrt(2), min_samples=7)
+        db = DBSCAN(eps=sqrt(2), min_samples=self.min_samples)
         db.fit(array_of_indexes)
 
         n_unique_labels = np.unique(db.labels_).size
