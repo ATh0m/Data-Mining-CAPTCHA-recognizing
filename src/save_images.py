@@ -1,9 +1,11 @@
 import numpy as np
 from scipy import misc
 
+
 class NewSign:
-    def __init__(self, pixels):
+    def __init__(self, pixels, side_of_save):
         self.pixels = pixels
+        self.side = side_of_save
         self.north, self.south, self.west, self.east = \
             self.find_borders()
         self.width = self.east - self.west
@@ -32,10 +34,11 @@ class NewSign:
 
         """save a bitmap of separated sign"""
 
-        bitmap = np.full((16, 16), 1.)
+        bitmap = np.full((self.side, self.side, 3),
+                         [255, 255, 255])
         for pixel in self.normalized:
-            if pixel[0] < 16 and pixel[1] < 16:
-                bitmap[pixel[0], pixel[1]] = 0.
+            if pixel[0] < self.side and pixel[1] < self.side:
+                bitmap[pixel[0], pixel[1]] = [0, 0, 0]
 
         return bitmap
 
